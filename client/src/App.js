@@ -19,7 +19,7 @@ function App() {
   // Load list of sessions
   const loadSessions = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/chat/sessions');
+      const res = await axios.get('https://aichatbot-mern-backend.onrender.com/api/chat/sessions');
       setSessions(res.data);
     } catch (error) {
       console.error('Failed to load sessions:', error);
@@ -33,7 +33,7 @@ function App() {
 
   const loadSessionMessages = async (date) => {
     try {
-      const res = await axios.get(`http://localhost:5000/api/chat/history/${date}`);
+      const res = await axios.get(`https://aichatbot-mern-backend.onrender.com/api/chat/history/${date}`);
       setMessages(res.data);
       setSelectedSession(date);
       setShowHistoryPanel(false);
@@ -49,7 +49,7 @@ function App() {
 
   const clearHistory = async () => {
     try {
-      await axios.delete('http://localhost:5000/api/chat/clear-all');
+      await axios.delete('https://aichatbot-mern-backend.onrender.com/api/chat/clear-all');
       setMessages([]);
       setSelectedSession(null);
       setSessions([]);
@@ -73,7 +73,7 @@ function App() {
     setLoading(true);
 
     try {
-      const res = await axios.post('http://localhost:5000/api/chat', {
+      const res = await axios.post('https://aichatbot-mern-backend.onrender.com/api/chat', {
         message: input,
         session: selectedSession
       });
