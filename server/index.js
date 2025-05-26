@@ -21,12 +21,13 @@ mongoose.connect(mongoURI)
   .then(() => console.log('✅ MongoDB connected'))
   .catch(err => console.error('❌ MongoDB connection error:', err));
 
-// Serve static frontend files from client/build
-app.use(express.static(path.join(__dirname, '../client/build')));
+// Serve static files from React app
+const buildPath = path.join(__dirname, '../client/build');
+app.use(express.static(buildPath));
 
-// Fallback route to serve React app
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/build/index.html'));
+// Serve frontend for all non-API routes
+app.get(/^\/(?!api).*/, (req, res) => {
+  res.sendFile(path.join(buildPath, 'index.html'));
 });
 
 // Start server
